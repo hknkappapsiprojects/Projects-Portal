@@ -21,6 +21,7 @@ carousel_images:
   - /images/projects/projects_portal_image7.png
   - /images/projects/projects_portal_image8.png
   - /images/projects/projects_portal_image9.png
+  - /images/projects/projects_portal_image10.png
 status: active
 winner_status: not winner
 keywords:
