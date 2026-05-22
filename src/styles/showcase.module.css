@@ -351,3 +351,92 @@
     width: 150px;
     height: 150px;
 }
+
+/* ============================================================
+   MOBILE RESPONSIVE STYLES
+   Applied only on screens ≤ 768px — desktop CSS untouched.
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* Hero */
+  .heroTitle {
+    font-size: 40px;
+  }
+
+  .heroSubtitle {
+    font-size: 18px;
+    padding: 0 12px;
+  }
+
+  /* Countdown: shrink so it never overflows the screen */
+  .countdown {
+    font-size: 32px;
+    word-break: break-all;
+  }
+
+  /* Hero content: tighten the row gap so items don't overlap */
+  .heroContent {
+    row-gap: 24px;
+    padding: 0 16px;
+  }
+
+  /* Main content */
+  .mainContent {
+    padding: 40px 0;
+  }
+
+  .sectionContainer {
+    padding: 24px 16px;
+  }
+
+  .title {
+    font-size: 24px;
+    white-space: normal;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  /* Project cards: stack image above text */
+  .project {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .project .imageFrame {
+    width: 100%;
+    height: 200px;
+  }
+
+  .project .projectDetailsContainer {
+    min-height: unset;
+  }
+
+  /* Project description: allow it to grow rather than overflow the box */
+  .project .projectDetails {
+    overflow: visible;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  /* Map section: stack map and location image vertically */
+  .mapContainer {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 24px;
+    column-gap: 0;
+  }
+
+  .map {
+    width: 100%;
+    height: 250px;
+  }
+
+  /* Sponsors: allow wrapping */
+  .sponsorsContainer {
+    flex-wrap: wrap;
+    row-gap: 20px;
+    justify-content: center;
+  }
+}

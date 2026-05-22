@@ -324,3 +324,67 @@
   font-size: 18px;
   padding: 40px 0;
 }
+
+/* ============================================================
+   MOBILE RESPONSIVE STYLES
+   Applied only on screens ≤ 768px — desktop CSS untouched.
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* Hero: scale down the big title */
+  .heroTitle {
+    font-size: 48px;
+  }
+
+  .heroSubtitle {
+    font-size: 22px;
+  }
+
+  /* Main content: reduce padding so nothing gets clipped */
+  .mainContent {
+    padding: 48px 20px 64px;
+    gap: 48px;
+  }
+
+  /* Section titles: allow wrapping so "::before/::after" lines still show */
+  .sectionTitle {
+    font-size: 24px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* About section: stack image above text instead of side-by-side */
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  /* Constrain the about image so it doesn't take the full 1:1 square on narrow screens */
+  .aboutImage {
+    max-height: 260px;
+    width: 100%;
+  }
+
+  .aboutHeading {
+    font-size: 20px;
+  }
+
+  .aboutBody {
+    font-size: 15px;
+  }
+
+  /* Carousel: reduce track height and hide side buttons to save space */
+  .carouselTrack {
+    height: 280px;
+  }
+
+  .carouselWrapper {
+    width: 100%;
+  }
+
+  /* Make side chevrons smaller so they don't crowd the card */
+  .carouselChevron {
+    width: 36px;
+    height: 140px;
+  }
+}
