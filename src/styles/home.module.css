@@ -222,7 +222,7 @@
 
 .carouselTrack {
   position: relative;
-  height: 400px;
+  height: 430px;
 }
 
 /* Base card */
@@ -375,7 +375,7 @@
 
   /* Carousel: reduce track height and hide side buttons to save space */
   .carouselTrack {
-    height: 280px;
+    height: 310px;
   }
 
   .carouselWrapper {

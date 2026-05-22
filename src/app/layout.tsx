@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/globals.css";
 import Header from '../components/header';
 import HKNChatbot from '../components/chatBot';
-import Script from 'next/script';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <Script
-  src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-  strategy="beforeInteractive"
-/>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header />
         {children}
         <HKNChatbot />
