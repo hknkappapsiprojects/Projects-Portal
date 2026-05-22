@@ -141,3 +141,47 @@
   text-align: center;
   margin: 2rem 0;
 }
+
+/* ============================================================
+   MOBILE RESPONSIVE STYLES — ≤ 768px
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 1rem;
+    padding-top: calc(1rem + 70px);
+  }
+
+  .page_title {
+    font-size: 38px;
+    margin: 1rem 0;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  /* Search bar full width */
+  .search_section {
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+
+  /* Cards: fill full width instead of fixed 360px */
+  .grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    flex: unset;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+  }
+
+  .card img {
+    height: 180px;
+    flex: unset;
+  }
+}

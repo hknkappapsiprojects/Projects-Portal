@@ -281,3 +281,61 @@
 .lightboxClose:hover {
   opacity: 1;
 }
+
+/* ============================================================
+   MOBILE RESPONSIVE STYLES — ≤ 768px
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .page {
+    padding: 20px 16px;
+    padding-top: calc(20px + 70px);
+  }
+
+  .mainTitle {
+    font-size: 36px;
+  }
+
+  .projectDateline {
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+  }
+
+  /* Image carousel: shrink the track to fit narrow screens */
+  .carouselWrapper {
+    gap: 8px;
+    margin: 48px 0;
+  }
+
+  .carouselTrackContainer {
+    width: 100%;
+  }
+
+  /* Active card slightly smaller so it doesn't clip */
+  .activeCard {
+    width: 180px;
+    height: 230px;
+  }
+
+  .card {
+    width: 110px;
+    height: 150px;
+  }
+
+  /* Members section: stack photo above member list */
+  .membersContent {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .memberPhoto {
+    width: 100%;
+    max-width: 320px;
+    height: 280px;
+  }
+
+  .memberList {
+    width: 100%;
+  }
+}
