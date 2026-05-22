@@ -375,7 +375,7 @@
 
   /* Carousel: reduce track height and hide side buttons to save space */
   .carouselTrack {
-    height: 310px;
+    height: 350px;
   }
 
   .carouselWrapper {
