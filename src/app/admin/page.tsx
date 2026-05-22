@@ -159,6 +159,21 @@ export default function AdminPage() {
           visibility: hidden !important;
         }
 
+        /* Fix: global dark-mode color (#ededed) cascades into the Netlify
+           Identity modal, making white-background inputs show white text.
+           Force all inputs/textareas inside the modal to use dark text. */
+        [data-netlify-identity-menu] input,
+        [data-netlify-identity-menu] textarea,
+        .netlify-identity-overlay input,
+        .netlify-identity-overlay textarea,
+        div[class*="modal"] input,
+        div[class*="modal"] textarea,
+        div[class*="Modal"] input,
+        div[class*="Modal"] textarea {
+          color: #111111 !important;
+          background-color: #ffffff !important;
+        }
+
         #nc-root {
           height: 100vh;
           width: 100%;

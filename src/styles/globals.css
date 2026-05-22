@@ -39,3 +39,27 @@ a {
     color-scheme: dark;
   }
 }
+
+/* Netlify Identity modal — fix white-on-white inputs in dark mode.
+   The widget appends its modal to <body> outside any scoped container,
+   so the global dark foreground color (#ededed) bleeds into its inputs. */
+@media (prefers-color-scheme: dark) {
+  [data-netlify-identity-menu] input,
+  [data-netlify-identity-menu] textarea,
+  .netlify-identity-overlay input,
+  .netlify-identity-overlay textarea {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+  }
+}
+
+/* Broader fallback: any input inside the identity widget container */
+@media (prefers-color-scheme: dark) {
+  #netlify-identity-widget-container input,
+  #netlify-identity-widget-container textarea,
+  #netlify-identity-widget input,
+  #netlify-identity-widget textarea {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+  }
+}
