@@ -1,16 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Script from 'next/script';
 
-declare global {
-  interface Window {
-    netlifyIdentity: {
-      on: (event: string, cb: (user?: unknown) => void) => void;
-      off: (event: string, cb: (user?: unknown) => void) => void;
-    };
-  }
-}
+// No Window declaration needed — we no longer touch netlifyIdentity directly.
+// Decap CMS owns the entire Identity lifecycle when using git-gateway.
 
 const CMS_CONFIG = {
   backend: { name: 'git-gateway', branch: 'main' },
@@ -125,37 +118,21 @@ export default function AdminPage() {
     if (cmsLoaded.current) return;
     cmsLoaded.current = true;
 
-    // Handle post-login reload.
+    // IMPORTANT: Do NOT load the Netlify Identity widget script separately
+    // (no <Script src="netlify-identity-widget.js">).
     //
-    // THE FREEZE BUG: Netlify Identity fires the 'login' event while its own
-    // modal is still mid-teardown. Calling window.location.reload() synchronously
-    // at that moment interrupts the modal's cleanup, leaving the browser in a
-    // half-navigated state that appears frozen.
+    // Decap CMS (git-gateway backend) bundles and manages its own copy of the
+    // Identity widget. Loading an external copy as well creates two widget
+    // instances that both try to handle the same auth flow. When you click
+    // login, one widget closes the modal while the other is still waiting for
+    // a response — the page appears frozen because the second instance is
+    // blocking on a promise that will never resolve.
     //
-    // Fix: defer the reload with setTimeout so the Identity widget can fully
-    // finish its own event handling and DOM cleanup before we reload.
-    const handleLogin = () => {
-      setTimeout(() => window.location.reload(), 100);
-    };
+    // "Manually initializing identity widget" in the console is Decap CMS
+    // reporting that IT is taking over — our external script was the intruder.
+    //
+    // Solution: remove the external script entirely and let Decap own auth.
 
-    const attachIdentityListeners = () => {
-      window.netlifyIdentity.on('login', handleLogin);
-    };
-
-    if (window.netlifyIdentity) {
-      attachIdentityListeners();
-    } else {
-      const interval = setInterval(() => {
-        if (window.netlifyIdentity) {
-          attachIdentityListeners();
-          clearInterval(interval);
-        }
-      }, 100);
-      setTimeout(() => clearInterval(interval), 5000);
-    }
-
-    // Yield to the browser before parsing the large CMS bundle
-    // so the loading indicator can paint first.
     setTimeout(() => {
       import('decap-cms-app').then(({ default: CMS }) => {
         CMS.init({ config: CMS_CONFIG });
@@ -166,9 +143,6 @@ export default function AdminPage() {
     }, 0);
 
     return () => {
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.off('login', handleLogin);
-      }
       const root = document.getElementById('nc-root');
       if (root) root.innerHTML = '';
       cmsLoaded.current = false;
@@ -177,10 +151,6 @@ export default function AdminPage() {
 
   return (
     <>
-      <Script
-        src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-        strategy="beforeInteractive"
-      />
       <style jsx global>{`
         .nextjs-error-overlay,
         [class*="error-overlay"],
